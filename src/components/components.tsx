@@ -4,10 +4,10 @@ import {
   ICardItem,
   IDropDownItem,
   IRefreshProps,
-  IRTI,
+  // IRTI,
   useCopy,
-  useGetMediaUrl,
-  useImage,
+  // useGetMediaUrl,
+  // useImage,
 } from "./hooks"
 import { FC } from "react"
 
@@ -262,30 +262,30 @@ export const RefreshComponent = ({ load, onRefresh, text }: IRefreshProps) => {
   )
 }
 
-export const MediaItem = ({ url }: { url: string }) => {
-  const imgProps = useImage()
-  const { mediaUrl } = useGetMediaUrl(url, imgProps)
+// export const MediaItem = ({ url }: { url: string }) => {
+//   const imgProps = useImage()
+//   const { mediaUrl } = useGetMediaUrl(url, imgProps)
 
-  return (
-    <div className="w-100 h-100 d-flex align-items-center justify-content-center">
-      {mediaUrl.load ? (
-        <PulseSVG />
-      ) : mediaUrl.type === "image" ? (
-        <img
-          src={mediaUrl.url}
-          alt=""
-          style={{ objectFit: "contain" }}
-          className="w-100 h-100"
-        />
-      ) : mediaUrl.type === "doc" ? (
-        <iframe
-          src={mediaUrl.url.replace("?dl=0", "?raw=1")}
-          width={"100%"}
-          height={"100%"}
-          title="firefighter"
-          // sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-        />
-      ) : null}
-    </div>
-  )
-}
+//   return (
+//     <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+//       {mediaUrl.load ? (
+//         <PulseSVG />
+//       ) : mediaUrl.type === "image" ? (
+//         <img
+//           src={mediaUrl.url}
+//           alt=""
+//           style={{ objectFit: "contain" }}
+//           className="w-100 h-100"
+//         />
+//       ) : mediaUrl.type === "doc" ? (
+//         <iframe
+//           src={mediaUrl.url.replace("?dl=0", "?raw=1")}
+//           width={"100%"}
+//           height={"100%"}
+//           title="firefighter"
+//           // sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+//         />
+//       ) : null}
+//     </div>
+//   )
+// }
