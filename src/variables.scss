@@ -1,0 +1,54 @@
+// src/styles/variables.scss
+$lg-breakpoint: 1200px !default;
+$md-breakpoint: 1024px !default;
+$sm-breakpoint: 768px !default;
+$font-family: "Arial, sans-serif" !default;
+$font-size: 16px !default;
+
+// color
+
+// pills
+$pill-text: #757575 !default;
+$pill-text-selected: #335433 !default;
+$pill-border: #e7e7e7 !default;
+$pill-border-selected: #75a575 !default;
+
+$color-danger: #f56e9d !default;
+$color-label: #8a8a8a !default;
+$color-light: #929292 !default;
+$color-disabled: #bdbdbd !default;
+$border-label: #f0f0f0 !default;
+
+// src/styles/variables.scss
+
+// Primary colors
+$primary: #007bff !default;
+$primary-dark: #0056b3 !default;
+$primary-light: #66b2ff !default;
+
+// Secondary colors
+$secondary: #6c757d !default;
+$secondary-dark: #495057 !default;
+$secondary-light: #adb5bd !default;
+
+// Functional colors
+$success: #28a745 !default;
+$success-dark: #1e7e34 !default;
+$success-light: #71d682 !default;
+
+$danger: #dc3545 !default;
+$danger-dark: #c82333 !default;
+$danger-light: #f5c6cb !default;
+
+$warning: #ffc107 !default;
+$warning-dark: #e0a800 !default;
+$warning-light: #ffeeba !default;
+
+$info: #17a2b8 !default;
+$info-dark: #117a8b !default;
+$info-light: #d1ecf1 !default;
+
+// Neutral colors
+$background: #f8f9fa !default;
+$surface: #ffffff !default;
+$text-color: #212529 !default;

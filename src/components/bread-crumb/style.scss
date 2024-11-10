@@ -1,0 +1,42 @@
+@use "../../variables.scss";
+
+.bread-crumb-section {
+  background: none;
+  width: 100%;
+  height: 30px;
+  @media (max-width: variables.$lg-breakpoint) {
+    height: 80px;
+  }
+}
+
+.bread-crumb-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  z-index: 10;
+  background: none;
+}
+
+.bread-crumb-header-text {
+  font-family: "Outfit_Regular", "Arial", "sans-serif";
+  text-transform: capitalize;
+  font-size: 12px;
+  margin: 0;
+  margin-right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  @media (max-width: variables.$md-breakpoint) {
+    font-size: 11px;
+  }
+}
+
+.bread-crumb-link-container {
+  font-family: inherit;
+  font-size: inherit;
+  color: variables.$primary;
+  display: flex;
+  text-decoration: underline;
+  &:hover {
+    color: inherit;
+  }
+}

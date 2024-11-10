@@ -1,0 +1,32 @@
+.action-item-component {
+  transition: 0.2s ease-in-out;
+  border: 1px solid #f0f0f0;
+  &:hover {
+    border: 1px solid rgb(233, 244, 233);
+    background-color: rgb(237, 247, 237);
+    color: rgb(15, 54, 15);
+    .icon-wrapper {
+      border: 1px solid #7db27d;
+      svg path {
+        color: #335433;
+        fill: #335433;
+      }
+    }
+  }
+}
+
+.icon-wrapper {
+  transition: 0.2s ease-in-out;
+  border: 1px solid #f0f0f0;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  &:hover {
+    border: 1px solid #7db27d;
+    svg path {
+      color: #335433;
+      fill: #335433;
+    }
+  }
+}
