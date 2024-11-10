@@ -1,10 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./index.scss"
 
-export { ActionItem, ActionIcon } from "./components/action"
+export { ActionItem } from "./components/action/item"
+export { ActionIcon } from "./components/action/icon"
 export { ActionComponent } from "./components/action-component"
 export { BreadCrumb } from "./components/bread-crumb"
-export { TypeButton, btnSize, btnType } from "./components/button"
+export { TypeButton } from "./components/button"
+export { btnSize, btnType } from "./components/button/interface"
 export { TypeCheckbox } from "./components/checkbox"
 export {
   FormBuilder,

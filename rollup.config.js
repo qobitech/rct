@@ -6,6 +6,7 @@ const postcss = require("rollup-plugin-postcss")
 const path = require("path")
 const json = require("@rollup/plugin-json")
 const { terser } = require("rollup-plugin-terser")
+const peerDepsExternal = require("rollup-plugin-peer-deps-external")
 
 module.exports = {
   input: "src/index.ts",
@@ -13,15 +14,16 @@ module.exports = {
     {
       file: "dist/index.cjs.js",
       format: "cjs",
-      sourcemap: false,
+      sourcemap: true,
     },
     {
       file: "dist/index.esm.js",
       format: "esm",
-      sourcemap: false,
+      sourcemap: true,
     },
   ],
   plugins: [
+    peerDepsExternal(), // Externalize peer dependencies like React
     terser(),
     json(),
     postcss({

@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import './style.scss'
+import React, { FC } from "react"
+import "./style.scss"
 
 interface IActionIcon {
   icon: JSX.Element
@@ -19,17 +19,6 @@ export const ActionItem: FC<IActionItem> = ({ action, icon, label }) => {
         {icon}
       </div>
       <p className="m-0 text-small">{label}</p>
-    </div>
-  )
-}
-
-export const ActionIcon: FC<IActionIcon> = ({ action, icon }) => {
-  return (
-    <div
-      className="rounded cursor-pointer p-2 f-row align-items-center justify-content-center icon-wrapper"
-      onClick={action}
-    >
-      {icon}
     </div>
   )
 }

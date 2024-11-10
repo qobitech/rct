@@ -1,4 +1,4 @@
-import { btnType } from "../button"
+import { btnType } from "../button/interface"
 
 export interface IGetCTA {
   action: actionType

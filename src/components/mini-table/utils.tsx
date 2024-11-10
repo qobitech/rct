@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { FC, useState } from 'react'
-import { HVC } from '../components'
-import { MinusSVG, PlusSVG } from '../svgs'
-import { btnSize, btnType, TypeButton } from '../button'
-import { ActionComponent, IOptionAction } from '../action-component'
-import { ITableAction } from '../table/utils'
-import { TypeSelect } from '../select'
+import { FC, useState } from "react"
+import { HVC } from "../components"
+import { MinusSVG, PlusSVG } from "../svgs"
+import { btnSize, btnType } from "../button/interface"
+import { TypeButton } from "../button"
+import { ActionComponent, IOptionAction } from "../action-component"
+import { ITableAction } from "../table/utils"
+import { TypeSelect } from "../select"
 
 export interface ICell {
   value?: string | number
@@ -24,7 +25,7 @@ export interface ICell {
   dangerouselySetHtml?: string
   mutate?: (id: string, value: string | number) => void
   mutateValue?: string | number
-  mutateType?: 'text' | 'number'
+  mutateType?: "text" | "number"
   mutateId?: string
   mutateMin?: number
   mutateMax?: number
@@ -34,11 +35,11 @@ export interface ICell {
 
 export interface ICellAction extends ICell {
   color?: string
-  view?: 'text' | 'icon' | 'both'
+  view?: "text" | "icon" | "both"
   background?: string
   buttonType?: btnType
   hide?: boolean
-  actionType?: 'btn' | 'btn-options'
+  actionType?: "btn" | "btn-options"
   options?: IOptionAction[]
   buttonSize?: btnSize
   load?: boolean
@@ -67,7 +68,7 @@ export const CellValueComponent: FC<ICell> = ({
   mutateMin,
   mutatePostTxt,
   imageUrl,
-  jsxElement
+  jsxElement,
 }) => {
   return (
     <TDContent
@@ -99,7 +100,7 @@ interface ITDC {
   dangerouselySetHtml: string
   mutate?: (id: string, value: string | number) => void
   mutateValue?: string | number
-  mutateType?: 'number' | 'text'
+  mutateType?: "number" | "text"
   mutateId?: string
   mutateMax?: number
   mutateMin?: number
@@ -123,7 +124,7 @@ const TDContent: FC<ITDC> = ({
   mutateMin,
   mutatePostTxt,
   imageUrl,
-  jsxElement
+  jsxElement,
 }) => {
   const [summarizeText, setSummarizeText] = useState<boolean>(
     () => !!textLength
@@ -131,11 +132,11 @@ const TDContent: FC<ITDC> = ({
   const isSumm = value ? value?.toString().length > textLength : false
   const cellValue = value
     ? textLength
-      ? value?.toString().substring(0, textLength) + (isSumm ? '...' : '')
+      ? value?.toString().substring(0, textLength) + (isSumm ? "..." : "")
       : value?.toString()
-    : ''
+    : ""
 
-  const isMutate = typeof mutate === 'function'
+  const isMutate = typeof mutate === "function"
   return (
     <>
       {/* mutate section */}
@@ -163,23 +164,23 @@ const TDContent: FC<ITDC> = ({
         {/* image url */}
         <HVC
           removeDOM
-          view={typeof imageUrl === 'string'}
+          view={typeof imageUrl === "string"}
           className="border-label"
           style={{
-            width: '30px',
-            height: '30px',
-            borderRadius: '50%',
-            overflow: 'hidden'
+            width: "30px",
+            height: "30px",
+            borderRadius: "50%",
+            overflow: "hidden",
           }}
         >
-          <img src={imageUrl} alt="" style={{ objectFit: 'cover' }} />
+          <img src={imageUrl} alt="" style={{ objectFit: "cover" }} />
         </HVC>
         {/* text */}
         <p className="m-0 d-flex align-items-center text-little">
           <span
             className={`d-block ${classProps}`}
             onClick={action}
-            style={{ width: cellWidth || '' }}
+            style={{ width: cellWidth || "" }}
             role="button"
           >
             {summarizeText ? cellValue : value}
@@ -188,7 +189,7 @@ const TDContent: FC<ITDC> = ({
             <span onClick={() => setSummarizeText(!summarizeText)}>
               <i
                 className={`ml-2 table-cell-border p-1 rounded fas fa-angle-${
-                  summarizeText ? 'up' : 'down'
+                  summarizeText ? "up" : "down"
                 }`}
               />
             </span>
@@ -204,7 +205,7 @@ const TDContent: FC<ITDC> = ({
 }
 
 interface IMutateValue {
-  mutateType?: 'number' | 'text'
+  mutateType?: "number" | "text"
   mutateValue?: string | number
   mutate?: (id: string, value: string | number) => void
   mutateId?: string
@@ -220,9 +221,9 @@ const MutateValue = ({
   mutateId,
   mutateMax,
   mutateMin,
-  mutatePostTxt
+  mutatePostTxt,
 }: IMutateValue) => {
-  const isNumber = mutateType === 'number'
+  const isNumber = mutateType === "number"
 
   const onMutate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = target
@@ -240,18 +241,18 @@ const MutateValue = ({
 
   const onAdd = () => {
     mutate?.(
-      mutateId || '',
-      Math.min(mutateMax || 1, parseInt((mutateValue || '0') as string) + 1)
+      mutateId || "",
+      Math.min(mutateMax || 1, parseInt((mutateValue || "0") as string) + 1)
     )
   }
   const onRemove = () => {
     mutate?.(
-      mutateId || '',
-      Math.max(mutateMin || 1, parseInt((mutateValue || '0') as string) - 1)
+      mutateId || "",
+      Math.max(mutateMin || 1, parseInt((mutateValue || "0") as string) - 1)
     )
   }
 
-  const color = '#9f9f9f'
+  const color = "#9f9f9f"
 
   return (
     <div className="f-row-5 align-items-center">
@@ -262,7 +263,7 @@ const MutateValue = ({
       ) : null}
       <input
         type={mutateType}
-        className={`mutate-input ${mutateType || 'text'}`}
+        className={`mutate-input ${mutateType || "text"}`}
         value={mutateValue}
         onChange={onMutate}
         id={mutateId}
@@ -284,7 +285,7 @@ const MutateValue = ({
 }
 
 interface ICVAC extends ICellAction {
-  nomargin?: 'true' | 'false'
+  nomargin?: "true" | "false"
 }
 
 export const CellValueActionComponent: FC<ICVAC> = ({
@@ -299,19 +300,19 @@ export const CellValueActionComponent: FC<ICVAC> = ({
   icon,
   actionType,
   options,
-  load
+  load,
 }) => {
   return (
     <>
-      {!actionType || actionType === 'btn' ? (
+      {!actionType || actionType === "btn" ? (
         <>
           {!hide ? (
             <TypeButton
               buttonSize="small"
               color={color}
-              title={view !== 'icon' ? value + '' : ''}
+              title={view !== "icon" ? value + "" : ""}
               buttonType={buttonType}
-              style={{ fontSize: '10px' }}
+              style={{ fontSize: "10px" }}
               onClick={action}
               className="mr-2"
               icon={icon}
@@ -320,7 +321,7 @@ export const CellValueActionComponent: FC<ICVAC> = ({
           ) : null}
         </>
       ) : null}
-      {actionType === 'btn-options' ? (
+      {actionType === "btn-options" ? (
         <ActionComponent
           actions={options}
           buttonSize="small"
@@ -341,35 +342,35 @@ interface ITableActionComponent {
 export const TableActionComponent: FC<ITableActionComponent> = ({
   tableAction,
   handleTableAction,
-  admin
+  admin,
 }) => {
   const isTableAction = !!tableAction?.selectedItems?.[0]
   return (
     <div
       style={{
-        borderBottom: !admin ? `1px solid #f1f1f1` : '',
-        position: 'sticky',
-        left: 0
+        borderBottom: !admin ? `1px solid #f1f1f1` : "",
+        position: "sticky",
+        left: 0,
       }}
-      className={`${!admin ? 'px-3' : ''} pb-3 d-flex align-items-center`}
+      className={`${!admin ? "px-3" : ""} pb-3 d-flex align-items-center`}
     >
       <div className="f-row-20 align-items-center">
         <TypeSelect
-          initoption={{ label: 'Select action', value: '' }}
+          initoption={{ label: "Select action", value: "" }}
           optionsdata={Object.values(tableAction?.actionEnums || {}).map(
             (i, index) => ({
               id: index,
-              label: i + '',
-              value: i + ''
+              label: i + "",
+              value: i + "",
             })
           )}
           disabled={!isTableAction}
-          value={tableAction?.action || ''}
+          value={tableAction?.action || ""}
           style={{
-            width: '150px',
-            height: '40px',
-            fontSize: '13px',
-            outline: '0'
+            width: "150px",
+            height: "40px",
+            fontSize: "13px",
+            outline: "0",
           }}
           onChange={({ target }) => {
             const { value } = target
@@ -378,7 +379,7 @@ export const TableActionComponent: FC<ITableActionComponent> = ({
         />
         <TypeButton
           title="Proceed"
-          buttonType={isTableAction ? 'outlined' : 'disabled'}
+          buttonType={isTableAction ? "outlined" : "disabled"}
           onClick={handleTableAction}
           disabled={!isTableAction}
           buttonSize="small"

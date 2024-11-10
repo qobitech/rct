@@ -1,6 +1,7 @@
-import React from 'react'
-import { PulseSVG } from '../svgs'
-import { btnSize, btnType, TypeButtonComponent } from '../button'
+import React from "react"
+import { PulseSVG } from "../svgs"
+import { btnSize, btnType } from "../button/interface"
+import { TypeButtonComponent } from "../button"
 
 export interface IOptionAction {
   label: string
@@ -15,7 +16,7 @@ export const ActionComponent = ({
   buttonType,
   buttonSize,
   className,
-  icon
+  icon,
 }: {
   title?: string
   actions?: IOptionAction[]
@@ -29,17 +30,17 @@ export const ActionComponent = ({
     <TypeButtonComponent className="dropdown">
       <button
         title="Action"
-        className={`dropdown-toggle ${buttonType || ''} ${buttonSize || ''} ${
-          className || ''
+        className={`dropdown-toggle ${buttonType || ""} ${buttonSize || ""} ${
+          className || ""
         }`}
         type="button"
         id="dropdownMenuButton"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
-        style={{ fontSize: '11px' }}
+        style={{ fontSize: "11px" }}
       >
-        {title || 'Action'}
+        {title || "Action"}
         {load ? (
           <>
             &nbsp;&nbsp;
@@ -57,8 +58,8 @@ export const ActionComponent = ({
           <p
             className={`dropdown-item m-0 text-little py-2 ${
               i.disabled
-                ? 'cursor-not-allowed color-disabled'
-                : 'cursor-pointer'
+                ? "cursor-not-allowed color-disabled"
+                : "cursor-pointer"
             }`}
             onClick={i.disabled ? undefined : i.action}
             key={index}

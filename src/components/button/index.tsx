@@ -1,34 +1,8 @@
-import React from 'react'
-import ButtonLoader from './button-loader'
-import { CloseSVG } from '../svgs'
-import styled from 'styled-components'
-
-export type btnType =
-  | 'outlined'
-  | 'bold'
-  | 'disabled'
-  | 'danger'
-  | 'active'
-  | undefined
-
-export type btnSize =
-  | 'little'
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'table'
-  | undefined
-
-interface IButton extends React.ComponentPropsWithoutRef<'button'> {
-  buttonType?: btnType
-  buttonSize?: btnSize
-  title: string
-  load?: boolean
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-  close?: boolean
-  status?: boolean
-  icon?: string | JSX.Element
-}
+import React from "react"
+import ButtonLoader from "./button-loader"
+import { CloseSVG } from "../svgs"
+import styled from "styled-components"
+import { IButton } from "./interface"
 
 export const TypeButton = React.forwardRef(
   (
@@ -44,9 +18,9 @@ export const TypeButton = React.forwardRef(
     }: IButton,
     ref
   ) => {
-    const isIconSTR = typeof icon === 'string'
+    const isIconSTR = typeof icon === "string"
     return (
-      <TypeButtonComponent className={props.className || ''}>
+      <TypeButtonComponent className={props.className || ""}>
         <button
           {...props}
           className={`${buttonType} ${buttonSize} ${props.className}`}
@@ -60,7 +34,7 @@ export const TypeButton = React.forwardRef(
             </span>
           ) : (
             <ButtonLoader
-              className={buttonType === 'outlined' ? 'bg-dark' : ''}
+              className={buttonType === "outlined" ? "bg-dark" : ""}
             />
           )}
         </button>
@@ -69,7 +43,7 @@ export const TypeButton = React.forwardRef(
   }
 )
 
-TypeButton.displayName = 'TypeButton'
+TypeButton.displayName = "TypeButton"
 
 export const TypeButtonComponent = styled.div`
   display: flex;
