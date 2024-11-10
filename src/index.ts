@@ -62,7 +62,7 @@ export { NotificationModal } from "./components/new-modal"
 export { PaginationComponent } from "./components/pagination"
 export { useModal } from "./components/new-modal/hook"
 
-export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
+// export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
 
 export { useCountDown } from "./components/timer"
 
