@@ -6,116 +6,117 @@ import React, {
   useRef,
   useState,
 } from "react"
-// import {
-//   DefaultValues,
-//   FieldValues,
-//   Path,
-//   PathValue,
-//   useForm,
-//   UseFormReturn,
-//   UseFormSetError,
-//   UseFormSetValue,
-// } from "react-hook-form"
-// import { yupResolver } from "@hookform/resolvers/yup"
-// import * as yup from "yup"
+
+import {
+  DefaultValues,
+  FieldValues,
+  Path,
+  PathValue,
+  useForm,
+  UseFormReturn,
+  UseFormSetError,
+  UseFormSetValue,
+} from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 import axios from "axios"
 
 type dragType = React.DragEvent<HTMLInputElement>
 
-// export const useUploadFileHook = <T extends HTMLElement, S extends FieldValues>(
-//   setError: UseFormSetError<S>,
-//   setValue: UseFormSetValue<S>,
-//   fileName: Path<S>,
-//   fileType: string,
-//   fileSize: number
-// ): [
-//   onDragEnter: (e: dragType) => void,
-//   onDragLeave: (e: dragType) => void,
-//   onDrop: (e: dragType) => void,
-//   onFileChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void,
-//   imgRef: React.RefObject<T>,
-//   isFileAdd: boolean,
-//   addedFileName: string
-// ] => {
-//   const imgRef = useRef<T>(null)
+export const useUploadFileHook = <T extends HTMLElement, S extends FieldValues>(
+  setError: UseFormSetError<S>,
+  setValue: UseFormSetValue<S>,
+  fileName: Path<S>,
+  fileType: string,
+  fileSize: number
+): [
+  onDragEnter: (e: dragType) => void,
+  onDragLeave: (e: dragType) => void,
+  onDrop: (e: dragType) => void,
+  onFileChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void,
+  imgRef: React.RefObject<T>,
+  isFileAdd: boolean,
+  addedFileName: string
+] => {
+  const imgRef = useRef<T>(null)
 
-//   const [isFileAdd, setIsFileAdd] = useState<boolean>(false)
-//   const [addedFileName, setAddedFileName] = useState<string>("")
+  const [isFileAdd, setIsFileAdd] = useState<boolean>(false)
+  const [addedFileName, setAddedFileName] = useState<string>("")
 
-//   const onDragEnter = (e: dragType) => {
-//     e.preventDefault()
-//     e.stopPropagation()
-//     if (imgRef.current) {
-//       imgRef.current.style.backgroundColor = "#929292"
-//       setIsFileAdd(true)
-//     }
-//   }
+  const onDragEnter = (e: dragType) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (imgRef.current) {
+      imgRef.current.style.backgroundColor = "#929292"
+      setIsFileAdd(true)
+    }
+  }
 
-//   const onDragLeave = (e: dragType) => {
-//     e.preventDefault()
-//     e.stopPropagation()
-//     if (imgRef.current) {
-//       imgRef.current.style.backgroundColor = "#fff"
-//       setIsFileAdd(false)
-//     }
-//   }
+  const onDragLeave = (e: dragType) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (imgRef.current) {
+      imgRef.current.style.backgroundColor = "#fff"
+      setIsFileAdd(false)
+    }
+  }
 
-//   const onDrop = (e: dragType) => {
-//     const errorMessage = verifyInputFile(e?.dataTransfer?.files[0])
-//     setError(fileName, { message: errorMessage })
-//     if (!errorMessage)
-//       setValue(fileName, e?.dataTransfer?.files[0] as PathValue<S, Path<S>>)
-//     if (imgRef.current) {
-//       imgRef.current.style.backgroundColor = "#fff"
-//       setIsFileAdd(false)
-//     }
-//   }
+  const onDrop = (e: dragType) => {
+    const errorMessage = verifyInputFile(e?.dataTransfer?.files[0])
+    setError(fileName, { message: errorMessage })
+    if (!errorMessage)
+      setValue(fileName, e?.dataTransfer?.files[0] as PathValue<S, Path<S>>)
+    if (imgRef.current) {
+      imgRef.current.style.backgroundColor = "#fff"
+      setIsFileAdd(false)
+    }
+  }
 
-//   const onFileChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-//     const { files } = target
-//     if (files) {
-//       const errorMessage = verifyInputFile(files[0])
-//       setError(fileName, { message: errorMessage })
-//       if (!errorMessage) setValue(fileName, files[0] as PathValue<S, Path<S>>)
-//     }
-//   }
+  const onFileChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = target
+    if (files) {
+      const errorMessage = verifyInputFile(files[0])
+      setError(fileName, { message: errorMessage })
+      if (!errorMessage) setValue(fileName, files[0] as PathValue<S, Path<S>>)
+    }
+  }
 
-//   const verifyInputFile = (file: File) => {
-//     const { type, size, name } = file
-//     if (!type.includes(fileType)) {
-//       return `Must be ${fileType}`
-//     }
+  const verifyInputFile = (file: File) => {
+    const { type, size, name } = file
+    if (!type.includes(fileType)) {
+      return `Must be ${fileType}`
+    }
 
-//     if (size > fileSize) {
-//       return "File size not allowed"
-//     }
-//     setAddedFileName(name)
-//   }
+    if (size > fileSize) {
+      return "File size not allowed"
+    }
+    setAddedFileName(name)
+  }
 
-//   return [
-//     onDragEnter,
-//     onDragLeave,
-//     onDrop,
-//     onFileChange,
-//     imgRef,
-//     isFileAdd,
-//     addedFileName,
-//   ]
-// }
+  return [
+    onDragEnter,
+    onDragLeave,
+    onDrop,
+    onFileChange,
+    imgRef,
+    isFileAdd,
+    addedFileName,
+  ]
+}
 
-// export const useFormHook = <T extends {}>(
-//   objSchema: {},
-//   defaultValues?: DefaultValues<T> | undefined
-// ): [UseFormReturn<T, any>] => {
-//   const schema = yup.object().shape(objSchema)
-//   const formMethods = useForm<T>({
-//     resolver: yupResolver(schema),
-//     mode: "onChange",
-//     defaultValues,
-//   })
+export const useFormHook = <T extends {}>(
+  objSchema: {},
+  defaultValues?: DefaultValues<T> | undefined
+): [UseFormReturn<T, any>] => {
+  const schema = yup.object().shape(objSchema)
+  const formMethods = useForm<T>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+    defaultValues,
+  })
 
-//   return [formMethods]
-// }
+  return [formMethods]
+}
 
 export const useToggler = (defaultCategory: string) => {
   const [category, setCategory] = useState<string>(defaultCategory)
@@ -354,6 +355,7 @@ const getFileSize = async (url: string): Promise<number | null> => {
     const contentLength = response.headers["content-length"]
     return contentLength ? parseInt(contentLength, 10) : null
   } catch (error) {
+    console.error("Error getting file size:", error)
     return null
   }
 }
@@ -374,7 +376,9 @@ export const useImageSize = (
           height: size.height,
         }))
       })
-      .catch((error) => {})
+      .catch((error) => {
+        console.error("Error loading image:", error)
+      })
 
     getFileSize(imageUrl)
       .then((size) => {
@@ -383,7 +387,9 @@ export const useImageSize = (
           size,
         }))
       })
-      .catch((error) => {})
+      .catch((error) => {
+        console.error("Error getting file size:", error)
+      })
   }, [imageUrl])
 
   return imageProps
@@ -407,189 +413,193 @@ export function useDebounce<T>(value: T, delay: number): T {
 
 export default useDebounce
 
-interface IIImgSize {
-  width: number
-  height: number
-}
+// interface IIImgSize {
+//   width: number
+//   height: number
+// }
 
-interface IFileDetails extends IIImgSize {
-  size: number | null
-  name: string
-  type: string
-  lastModified: Date | null
-}
+// interface IFileDetails extends IIImgSize {
+//   size: number | null
+//   name: string
+//   type: string
+//   lastModified: Date | null
+// }
 
-// Function to get image dimensions
-const getIImageSize = async (url: string): Promise<IImgSize> => {
-  return await new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      resolve({ width: img.width, height: img.height })
-    }
-    img.onerror = reject
-    img.src = url
-  })
-}
+// // Function to get image dimensions
+// const getIImageSize = async (url: string): Promise<IImgSize> => {
+//   return await new Promise((resolve, reject) => {
+//     const img = new Image()
+//     img.onload = () => {
+//       resolve({ width: img.width, height: img.height })
+//     }
+//     img.onerror = reject
+//     img.src = url
+//   })
+// }
 
-// Function to get file details
-const getFileDetails = async (
-  url: string
-): Promise<Omit<IFileDetails, "width" | "height">> => {
-  try {
-    const response = await axios.head(url)
-    const contentLength = response.headers["content-length"]
-    const contentType = response.headers["content-type"]
-    const lastModified = response.headers["last-modified"]
+// // Function to get file details
+// // Function to get file details
+// const getFileDetails = async (
+//   url: string
+// ): Promise<Omit<IFileDetails, "width" | "height">> => {
+//   try {
+//     const response = await axios.head(url)
+//     const contentLength = response.headers["content-length"]
+//     const contentType = response.headers["content-type"]
+//     const lastModified = response.headers["last-modified"]
 
-    const fileName = url.substring(url.lastIndexOf("/") + 1)
+//     const fileName = url.substring(url.lastIndexOf("/") + 1)
 
-    return {
-      size: contentLength ? parseInt(contentLength, 10) : null,
-      name: fileName,
-      type: contentType || "",
-      lastModified: lastModified ? new Date(lastModified) : null,
-    }
-  } catch (error) {
-    return {
-      size: null,
-      name: "",
-      type: "",
-      lastModified: null,
-    }
-  }
-}
+//     return {
+//       size: contentLength ? parseInt(contentLength, 10) : null,
+//       name: fileName,
+//       type: contentType || "",
+//       lastModified: lastModified ? new Date(lastModified) : null,
+//     }
+//   } catch (error) {
+//     console.error("Error getting file details:", error)
+//     return {
+//       size: null,
+//       name: "",
+//       type: "",
+//       lastModified: null,
+//     }
+//   }
+// }
 
-export const useImageDetails = (imageUrl: string): IFileDetails => {
-  const [imageProps, setImageProps] = useState<IFileDetails>({
-    width: 0,
-    height: 0,
-    size: null,
-    name: "",
-    type: "",
-    lastModified: null,
-  })
+// export const useImageDetails = (imageUrl: string): IFileDetails => {
+//   const [imageProps, setImageProps] = useState<IFileDetails>({
+//     width: 0,
+//     height: 0,
+//     size: null,
+//     name: "",
+//     type: "",
+//     lastModified: null,
+//   })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [size, details] = await Promise.all([
-          getIImageSize(imageUrl),
-          getFileDetails(imageUrl),
-        ])
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const [size, details] = await Promise.all([
+//           getIImageSize(imageUrl),
+//           getFileDetails(imageUrl),
+//         ])
 
-        setImageProps({ ...size, ...details })
-      } catch (error) {}
-    }
+//         setImageProps({ ...size, ...details })
+//       } catch (error) {
+//         console.error("Error loading image details:", error)
+//       }
+//     }
 
-    fetchData()
-  }, [imageUrl])
+//     fetchData()
+//   }, [imageUrl])
 
-  return imageProps
-}
+//   return imageProps
+// }
 
-export interface IUseImage {
-  isLoaded: boolean
-  isError: boolean
-  handleError: (error: boolean) => void
-  handleLoad: (load: boolean) => void
-}
+// export interface IUseImage {
+//   isLoaded: boolean
+//   isError: boolean
+//   handleError: (error: boolean) => void
+//   handleLoad: (load: boolean) => void
+// }
 
-export const useImage = (): IUseImage => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isError, setIsError] = useState(false)
+// export const useImage = (): IUseImage => {
+//   const [isLoaded, setIsLoaded] = useState(false)
+//   const [isError, setIsError] = useState(false)
 
-  const handleLoad = (load: boolean) => {
-    setIsLoaded(load)
-  }
+//   const handleLoad = (load: boolean) => {
+//     setIsLoaded(load)
+//   }
 
-  const handleError = (error: boolean) => {
-    setIsError(error)
-  }
+//   const handleError = (error: boolean) => {
+//     setIsError(error)
+//   }
 
-  return {
-    isLoaded,
-    isError,
-    handleError,
-    handleLoad,
-  }
-}
+//   return {
+//     isLoaded,
+//     isError,
+//     handleError,
+//     handleLoad,
+//   }
+// }
 
-interface IMediaURL {
-  mediaUrl: {
-    type: "doc" | "image" | null
-    url: string
-    load: boolean
-  }
-}
+// interface IMediaURL {
+//   mediaUrl: {
+//     type: "doc" | "image" | null
+//     url: string
+//     load: boolean
+//   }
+// }
 
-const isImageExist = async (
-  url: string,
-  imgProps: IUseImage
-): Promise<boolean> =>
-  await new Promise((resolve) => {
-    const img = new Image()
-    img.onload = () => {
-      imgProps.handleLoad(true)
-      resolve(true)
-      cleanup()
-    }
-    img.onerror = () => {
-      imgProps.handleError(true)
-      resolve(false)
-      cleanup()
-    }
-    img.src = url
+// const isImageExist = async (
+//   url: string,
+//   imgProps: IUseImage
+// ): Promise<boolean> =>
+//   await new Promise((resolve) => {
+//     const img = new Image()
+//     img.onload = () => {
+//       imgProps.handleLoad(true)
+//       resolve(true)
+//       cleanup()
+//     }
+//     img.onerror = () => {
+//       imgProps.handleError(true)
+//       resolve(false)
+//       cleanup()
+//     }
+//     img.src = url
 
-    // Cleanup function to remove event listeners and clear the src attribute
-    const cleanup = () => {
-      img.onload = null
-      img.onerror = null
-      img.src = ""
-      imgProps.handleLoad(false)
-      imgProps.handleError(false)
-    }
-  })
+//     // Cleanup function to remove event listeners and clear the src attribute
+//     const cleanup = () => {
+//       img.onload = null
+//       img.onerror = null
+//       img.src = ""
+//       imgProps.handleLoad(false)
+//       imgProps.handleError(false)
+//     }
+//   })
 
-export const useGetMediaUrl = (url: string, imgProps: IUseImage): IMediaURL => {
-  const [mediaUrl, setMediaUrl] = useState<{
-    type: "doc" | "image" | null
-    url: string
-    load: boolean
-  }>({ type: "image", url: "", load: false })
+// export const useGetMediaUrl = (url: string, imgProps: IUseImage): IMediaURL => {
+//   const [mediaUrl, setMediaUrl] = useState<{
+//     type: "doc" | "image" | null
+//     url: string
+//     load: boolean
+//   }>({ type: "image", url: "", load: false })
 
-  useEffect(() => {
-    setMediaUrl({ load: true, type: null, url: "" })
-    const getMediaUrl = async (): Promise<{
-      type: "doc" | "image" | null
-      url: string
-      load: boolean
-    }> => {
-      if (url) {
-        const isImage = await isImageExist(url, imgProps)
-        return {
-          type: isImage ? "image" : "doc",
-          url,
-          load: false,
-        }
-      } else {
-        return { type: "image", url: "", load: false }
-      }
-    }
-    getMediaUrl().then((data) => {
-      setMediaUrl(data)
-    })
-  }, [url])
+//   useEffect(() => {
+//     setMediaUrl({ load: true, type: null, url: "" })
+//     const getMediaUrl = async (): Promise<{
+//       type: "doc" | "image" | null
+//       url: string
+//       load: boolean
+//     }> => {
+//       if (url) {
+//         const isImage = await isImageExist(url, imgProps)
+//         return {
+//           type: isImage ? "image" : "doc",
+//           url,
+//           load: false,
+//         }
+//       } else {
+//         return { type: "image", url: "", load: false }
+//       }
+//     }
+//     getMediaUrl().then((data) => {
+//       setMediaUrl(data)
+//     })
+//   }, [url])
 
-  return {
-    mediaUrl,
-  }
-}
+//   return {
+//     mediaUrl,
+//   }
+// }
 
-export interface IRTI {
-  title: string
-  description: string
-  isActive?: boolean
-  onProceed?: () => void
-  onSelect?: () => void
-  disabled?: boolean
-}
+// export interface IRTI {
+//   title: string
+//   description: string
+//   isActive?: boolean
+//   onProceed?: () => void
+//   onSelect?: () => void
+//   disabled?: boolean
+// }
