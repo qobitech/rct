@@ -331,273 +331,273 @@ export interface IRefreshProps {
   text?: string
 }
 
-export interface IImgSize {
-  width: number
-  height: number
-}
+// export interface IImgSize {
+//   width: number
+//   height: number
+// }
 
 // Function to get image dimensions
-const getImageSize = async (url: string): Promise<IImgSize> => {
-  return await new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      resolve({ width: img.width, height: img.height })
-    }
-    img.onerror = reject
-    img.src = url
-  })
-}
+// const getImageSize = async (url: string): Promise<IImgSize> => {
+//   return await new Promise((resolve, reject) => {
+//     const img = new Image()
+//     img.onload = () => {
+//       resolve({ width: img.width, height: img.height })
+//     }
+//     img.onerror = reject
+//     img.src = url
+//   })
+// }
 
-// Function to get image file size
-const getFileSize = async (url: string): Promise<number | null> => {
-  try {
-    const response = await axios.head(url)
-    const contentLength = response.headers["content-length"]
-    return contentLength ? parseInt(contentLength, 10) : null
-  } catch (error) {
-    console.error("Error getting file size:", error)
-    return null
-  }
-}
+// // Function to get image file size
+// const getFileSize = async (url: string): Promise<number | null> => {
+//   try {
+//     const response = await axios.head(url)
+//     const contentLength = response.headers["content-length"]
+//     return contentLength ? parseInt(contentLength, 10) : null
+//   } catch (error) {
+//     console.error("Error getting file size:", error)
+//     return null
+//   }
+// }
 
-export const useImageSize = (
-  imageUrl: string
-): IImgSize & { size: number | null } => {
-  const [imageProps, setImageProps] = useState<
-    IImgSize & { size: number | null }
-  >({ width: 0, height: 0, size: 0 })
+// export const useImageSize = (
+//   imageUrl: string
+// ): IImgSize & { size: number | null } => {
+//   const [imageProps, setImageProps] = useState<
+//     IImgSize & { size: number | null }
+//   >({ width: 0, height: 0, size: 0 })
 
-  useEffect(() => {
-    getImageSize(imageUrl)
-      .then((size) => {
-        setImageProps((prev) => ({
-          ...prev,
-          width: size.width,
-          height: size.height,
-        }))
-      })
-      .catch((error) => {
-        console.error("Error loading image:", error)
-      })
+//   useEffect(() => {
+//     getImageSize(imageUrl)
+//       .then((size) => {
+//         setImageProps((prev) => ({
+//           ...prev,
+//           width: size.width,
+//           height: size.height,
+//         }))
+//       })
+//       .catch((error) => {
+//         console.error("Error loading image:", error)
+//       })
 
-    getFileSize(imageUrl)
-      .then((size) => {
-        setImageProps((prev) => ({
-          ...prev,
-          size,
-        }))
-      })
-      .catch((error) => {
-        console.error("Error getting file size:", error)
-      })
-  }, [imageUrl])
+//     getFileSize(imageUrl)
+//       .then((size) => {
+//         setImageProps((prev) => ({
+//           ...prev,
+//           size,
+//         }))
+//       })
+//       .catch((error) => {
+//         console.error("Error getting file size:", error)
+//       })
+//   }, [imageUrl])
 
-  return imageProps
-}
+//   return imageProps
+// }
 
-export function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value)
+// export function useDebounce<T>(value: T, delay: number): T {
+//   const [debouncedValue, setDebouncedValue] = useState(value)
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value)
-    }, delay)
+//   useEffect(() => {
+//     const handler = setTimeout(() => {
+//       setDebouncedValue(value)
+//     }, delay)
 
-    return () => {
-      clearTimeout(handler)
-    }
-  }, [value, delay])
+//     return () => {
+//       clearTimeout(handler)
+//     }
+//   }, [value, delay])
 
-  return debouncedValue
-}
+//   return debouncedValue
+// }
 
-interface IIImgSize {
-  width: number
-  height: number
-}
+// interface IIImgSize {
+//   width: number
+//   height: number
+// }
 
-interface IFileDetails extends IIImgSize {
-  size: number | null
-  name: string
-  type: string
-  lastModified: Date | null
-}
+// interface IFileDetails extends IIImgSize {
+//   size: number | null
+//   name: string
+//   type: string
+//   lastModified: Date | null
+// }
 
-// Function to get image dimensions
-const getIImageSize = async (url: string): Promise<IImgSize> => {
-  return await new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      resolve({ width: img.width, height: img.height })
-    }
-    img.onerror = reject
-    img.src = url
-  })
-}
+// // Function to get image dimensions
+// const getIImageSize = async (url: string): Promise<IImgSize> => {
+//   return await new Promise((resolve, reject) => {
+//     const img = new Image()
+//     img.onload = () => {
+//       resolve({ width: img.width, height: img.height })
+//     }
+//     img.onerror = reject
+//     img.src = url
+//   })
+// }
 
-// Function to get file details
-// Function to get file details
-const getFileDetails = async (
-  url: string
-): Promise<Omit<IFileDetails, "width" | "height">> => {
-  try {
-    const response = await axios.head(url)
-    const contentLength = response.headers["content-length"]
-    const contentType = response.headers["content-type"]
-    const lastModified = response.headers["last-modified"]
+// // Function to get file details
+// // Function to get file details
+// const getFileDetails = async (
+//   url: string
+// ): Promise<Omit<IFileDetails, "width" | "height">> => {
+//   try {
+//     const response = await axios.head(url)
+//     const contentLength = response.headers["content-length"]
+//     const contentType = response.headers["content-type"]
+//     const lastModified = response.headers["last-modified"]
 
-    const fileName = url.substring(url.lastIndexOf("/") + 1)
+//     const fileName = url.substring(url.lastIndexOf("/") + 1)
 
-    return {
-      size: contentLength ? parseInt(contentLength, 10) : null,
-      name: fileName,
-      type: contentType || "",
-      lastModified: lastModified ? new Date(lastModified) : null,
-    }
-  } catch (error) {
-    console.error("Error getting file details:", error)
-    return {
-      size: null,
-      name: "",
-      type: "",
-      lastModified: null,
-    }
-  }
-}
+//     return {
+//       size: contentLength ? parseInt(contentLength, 10) : null,
+//       name: fileName,
+//       type: contentType || "",
+//       lastModified: lastModified ? new Date(lastModified) : null,
+//     }
+//   } catch (error) {
+//     console.error("Error getting file details:", error)
+//     return {
+//       size: null,
+//       name: "",
+//       type: "",
+//       lastModified: null,
+//     }
+//   }
+// }
 
-export const useImageDetails = (imageUrl: string): IFileDetails => {
-  const [imageProps, setImageProps] = useState<IFileDetails>({
-    width: 0,
-    height: 0,
-    size: null,
-    name: "",
-    type: "",
-    lastModified: null,
-  })
+// export const useImageDetails = (imageUrl: string): IFileDetails => {
+//   const [imageProps, setImageProps] = useState<IFileDetails>({
+//     width: 0,
+//     height: 0,
+//     size: null,
+//     name: "",
+//     type: "",
+//     lastModified: null,
+//   })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [size, details] = await Promise.all([
-          getIImageSize(imageUrl),
-          getFileDetails(imageUrl),
-        ])
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const [size, details] = await Promise.all([
+//           getIImageSize(imageUrl),
+//           getFileDetails(imageUrl),
+//         ])
 
-        setImageProps({ ...size, ...details })
-      } catch (error) {
-        console.error("Error loading image details:", error)
-      }
-    }
+//         setImageProps({ ...size, ...details })
+//       } catch (error) {
+//         console.error("Error loading image details:", error)
+//       }
+//     }
 
-    fetchData()
-  }, [imageUrl])
+//     fetchData()
+//   }, [imageUrl])
 
-  return imageProps
-}
+//   return imageProps
+// }
 
-export interface IUseImage {
-  isLoaded: boolean
-  isError: boolean
-  handleError: (error: boolean) => void
-  handleLoad: (load: boolean) => void
-}
+// export interface IUseImage {
+//   isLoaded: boolean
+//   isError: boolean
+//   handleError: (error: boolean) => void
+//   handleLoad: (load: boolean) => void
+// }
 
-export const useImage = (): IUseImage => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isError, setIsError] = useState(false)
+// export const useImage = (): IUseImage => {
+//   const [isLoaded, setIsLoaded] = useState(false)
+//   const [isError, setIsError] = useState(false)
 
-  const handleLoad = (load: boolean) => {
-    setIsLoaded(load)
-  }
+//   const handleLoad = (load: boolean) => {
+//     setIsLoaded(load)
+//   }
 
-  const handleError = (error: boolean) => {
-    setIsError(error)
-  }
+//   const handleError = (error: boolean) => {
+//     setIsError(error)
+//   }
 
-  return {
-    isLoaded,
-    isError,
-    handleError,
-    handleLoad,
-  }
-}
+//   return {
+//     isLoaded,
+//     isError,
+//     handleError,
+//     handleLoad,
+//   }
+// }
 
-interface IMediaURL {
-  mediaUrl: {
-    type: "doc" | "image" | null
-    url: string
-    load: boolean
-  }
-}
+// interface IMediaURL {
+//   mediaUrl: {
+//     type: "doc" | "image" | null
+//     url: string
+//     load: boolean
+//   }
+// }
 
-const isImageExist = async (
-  url: string,
-  imgProps: IUseImage
-): Promise<boolean> =>
-  await new Promise((resolve) => {
-    const img = new Image()
-    img.onload = () => {
-      imgProps.handleLoad(true)
-      resolve(true)
-      cleanup()
-    }
-    img.onerror = () => {
-      imgProps.handleError(true)
-      resolve(false)
-      cleanup()
-    }
-    img.src = url
+// const isImageExist = async (
+//   url: string,
+//   imgProps: IUseImage
+// ): Promise<boolean> =>
+//   await new Promise((resolve) => {
+//     const img = new Image()
+//     img.onload = () => {
+//       imgProps.handleLoad(true)
+//       resolve(true)
+//       cleanup()
+//     }
+//     img.onerror = () => {
+//       imgProps.handleError(true)
+//       resolve(false)
+//       cleanup()
+//     }
+//     img.src = url
 
-    // Cleanup function to remove event listeners and clear the src attribute
-    const cleanup = () => {
-      img.onload = null
-      img.onerror = null
-      img.src = ""
-      imgProps.handleLoad(false)
-      imgProps.handleError(false)
-    }
-  })
+//     // Cleanup function to remove event listeners and clear the src attribute
+//     const cleanup = () => {
+//       img.onload = null
+//       img.onerror = null
+//       img.src = ""
+//       imgProps.handleLoad(false)
+//       imgProps.handleError(false)
+//     }
+//   })
 
-export const useGetMediaUrl = (url: string, imgProps: IUseImage): IMediaURL => {
-  const [mediaUrl, setMediaUrl] = useState<{
-    type: "doc" | "image" | null
-    url: string
-    load: boolean
-  }>({ type: "image", url: "", load: false })
+// export const useGetMediaUrl = (url: string, imgProps: IUseImage): IMediaURL => {
+//   const [mediaUrl, setMediaUrl] = useState<{
+//     type: "doc" | "image" | null
+//     url: string
+//     load: boolean
+//   }>({ type: "image", url: "", load: false })
 
-  useEffect(() => {
-    setMediaUrl({ load: true, type: null, url: "" })
-    const getMediaUrl = async (): Promise<{
-      type: "doc" | "image" | null
-      url: string
-      load: boolean
-    }> => {
-      if (url) {
-        const isImage = await isImageExist(url, imgProps)
-        return {
-          type: isImage ? "image" : "doc",
-          url,
-          load: false,
-        }
-      } else {
-        return { type: "image", url: "", load: false }
-      }
-    }
-    getMediaUrl().then((data) => {
-      setMediaUrl(data)
-    })
-  }, [url])
+//   useEffect(() => {
+//     setMediaUrl({ load: true, type: null, url: "" })
+//     const getMediaUrl = async (): Promise<{
+//       type: "doc" | "image" | null
+//       url: string
+//       load: boolean
+//     }> => {
+//       if (url) {
+//         const isImage = await isImageExist(url, imgProps)
+//         return {
+//           type: isImage ? "image" : "doc",
+//           url,
+//           load: false,
+//         }
+//       } else {
+//         return { type: "image", url: "", load: false }
+//       }
+//     }
+//     getMediaUrl().then((data) => {
+//       setMediaUrl(data)
+//     })
+//   }, [url])
 
-  return {
-    mediaUrl,
-  }
-}
+//   return {
+//     mediaUrl,
+//   }
+// }
 
-export interface IRTI {
-  title: string
-  description: string
-  isActive?: boolean
-  onProceed?: () => void
-  onSelect?: () => void
-  disabled?: boolean
-}
+// export interface IRTI {
+//   title: string
+//   description: string
+//   isActive?: boolean
+//   onProceed?: () => void
+//   onSelect?: () => void
+//   disabled?: boolean
+// }
