@@ -45,5 +45,5 @@ module.exports = {
       babelHelpers: "bundled",
     }),
   ],
-  external: ["react", "react-dom"],
+  external: ["react", "react-dom", "styled-components"],
 }
