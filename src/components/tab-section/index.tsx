@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
-import styled from 'styled-components'
-import { ITabComponentProp } from './hooks'
+import React, { FC } from "react"
+import styled from "styled-components"
+import { ITabComponentProp } from "./interface"
 
 export interface ITabSection {
   tabProps: ITabComponentProp[]
-  position: 'start' | 'end' | 'center'
-  positionMobile?: 'start' | 'end' | 'center'
+  position: "start" | "end" | "center"
+  positionMobile?: "start" | "end" | "center"
   tabGap?: string
-  type?: 'default' | 'block'
+  type?: "default" | "block"
 }
 
 export const TabSection: FC<ITabSection> = ({
@@ -15,16 +15,16 @@ export const TabSection: FC<ITabSection> = ({
   position,
   positionMobile,
   tabGap,
-  type
+  type,
 }) => {
   return (
     <TabHeaderStyle
       className={`d-flex ${
-        type === 'block' ? 'flex-wrap' : 'bottom'
+        type === "block" ? "flex-wrap" : "bottom"
       } justify-content-${position}`}
-      style={{ gap: `${tabGap || 50}px`, overflow: 'auto' }}
+      style={{ gap: `${tabGap || 50}px`, overflow: "auto" }}
     >
-      {type !== 'block'
+      {type !== "block"
         ? tabProps.map((i, index) => (
             <TabComponent
               key={index}
@@ -35,7 +35,7 @@ export const TabSection: FC<ITabSection> = ({
             />
           ))
         : null}
-      {type === 'block'
+      {type === "block"
         ? tabProps.map((i, index) => (
             <TabBlockComponent
               key={index}
@@ -55,7 +55,7 @@ export const TabComponent = ({
   title,
   setTab,
   number,
-  onSetTab
+  onSetTab,
 }: {
   isSelected: boolean
   title: string
@@ -66,10 +66,10 @@ export const TabComponent = ({
   return (
     <div
       style={{
-        width: 'max-content',
-        height: 'max-content',
-        cursor: 'pointer',
-        flexShrink: 0
+        width: "max-content",
+        height: "max-content",
+        cursor: "pointer",
+        flexShrink: 0,
       }}
       onClick={() => {
         setTab(title)
@@ -77,18 +77,18 @@ export const TabComponent = ({
       }}
     >
       <TabTitleStyle
-        className={`mb-2 ${isSelected ? '' : 'color-light'}`}
+        className={`mb-2 ${isSelected ? "" : "color-light"}`}
         style={{
-          whiteSpace: 'nowrap'
+          whiteSpace: "nowrap",
         }}
       >
         {title}
-        {number || ''}
+        {number || ""}
       </TabTitleStyle>
       <div
         style={{
-          background: isSelected ? '#000' : 'none',
-          height: '3px'
+          background: isSelected ? "#000" : "none",
+          height: "3px",
         }}
         className="w-100 rounded"
       />
@@ -101,7 +101,7 @@ export const TabBlockComponent = ({
   title,
   setTab,
   number,
-  onSetTab
+  onSetTab,
 }: {
   isSelected: boolean
   title: string
@@ -112,13 +112,13 @@ export const TabBlockComponent = ({
   return (
     <div
       style={{
-        width: 'max-content',
-        height: 'max-content',
-        cursor: 'pointer',
+        width: "max-content",
+        height: "max-content",
+        cursor: "pointer",
         flexShrink: 0,
-        padding: '0.4725rem 0.8725rem',
-        background: isSelected ? `rgb(220 242 232)` : 'none',
-        transition: '.2s ease all'
+        padding: "0.4725rem 0.8725rem",
+        background: isSelected ? `rgb(220 242 232)` : "none",
+        transition: ".2s ease all",
       }}
       onClick={() => {
         setTab(title)
@@ -127,14 +127,14 @@ export const TabBlockComponent = ({
       className="rounded"
     >
       <TabTitleStyle
-        className={`m-0 ${isSelected ? '' : ''}`}
+        className={`m-0 ${isSelected ? "" : ""}`}
         style={{
-          whiteSpace: 'nowrap',
-          fontSize: '0.79625rem'
+          whiteSpace: "nowrap",
+          fontSize: "0.79625rem",
         }}
       >
         {title}
-        {number || ''}
+        {number || ""}
       </TabTitleStyle>
     </div>
   )

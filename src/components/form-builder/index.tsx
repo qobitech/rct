@@ -6,7 +6,7 @@ import { TypeCheckbox } from "../checkbox"
 import { TypeTextArea } from "../text-area"
 import { HVC } from "../components"
 import { IRefreshProps } from "../hooks"
-import OTPInput from "../otp"
+import { TypeInputOTP } from "../otp"
 
 export type typecomponent =
   | "input"
@@ -80,7 +80,7 @@ export const FormBuilder = <T extends FieldValues>({
             />
           )}
           {i.component === "otp" && (
-            <OTPInput
+            <TypeInputOTP
               onChange={(otp) => {
                 hookForm.setValue(i.id as Path<T>, otp as PathValue<T, Path<T>>)
               }}
