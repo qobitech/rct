@@ -6,8 +6,6 @@ import React, {
   useRef,
   useState,
 } from "react"
-import queryString from "query-string"
-
 import {
   DefaultValues,
   FieldValues,

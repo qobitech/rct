@@ -45,5 +45,12 @@ module.exports = {
       babelHelpers: "bundled",
     }),
   ],
-  external: ["react", "react-dom", "styled-components"],
+  external: [
+    "react",
+    "react-dom",
+    "styled-components",
+    "react-hook-form",
+    "@hookform/resolvers",
+    "yup",
+  ],
 }
