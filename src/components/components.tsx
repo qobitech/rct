@@ -1,12 +1,5 @@
-import {
-  AlertSVG,
-  CheckSVG,
-  CopySVG,
-  ElectionSVG,
-  PulseSVG,
-  RefreshSVG
-} from './svgs'
-import { TypeButton } from './button'
+import { AlertSVG, CheckSVG, CopySVG, PulseSVG, RefreshSVG } from "./svgs"
+import { TypeButton } from "./button"
 import {
   ICardItem,
   IDropDownItem,
@@ -14,9 +7,9 @@ import {
   IRTI,
   useCopy,
   useGetMediaUrl,
-  useImage
-} from './hooks'
-import { FC } from 'react'
+  useImage,
+} from "./hooks"
+import { FC } from "react"
 
 interface IHVC
   extends React.DetailedHTMLProps<
@@ -33,7 +26,7 @@ interface IHVC
 export const HVC: FC<IHVC> = ({
   view,
   children,
-  className = '',
+  className = "",
   removeDOM = false,
   load = false,
   auth = false,
@@ -55,7 +48,7 @@ export const HVC: FC<IHVC> = ({
   }
 
   return (
-    <div className={`${!view ? 'd-none' : ''} ${className}`} {...props}>
+    <div className={`${!view ? "d-none" : ""} ${className}`} {...props}>
       {children}
     </div>
   )
@@ -101,7 +94,7 @@ export const HVCLoad: FC<IHVCLoad> = ({
     )
 
   return (
-    <div className={`${view ? '' : 'd-none'} ${className}`} {...props}>
+    <div className={`${view ? "" : "d-none"} ${className}`} {...props}>
       {children}
     </div>
   )
@@ -122,7 +115,7 @@ export const OverViewHeader = ({
   title,
   moreInfo,
   onMoreInfo,
-  isInfo
+  isInfo,
 }: {
   title: string
   moreInfo?: boolean
@@ -130,11 +123,11 @@ export const OverViewHeader = ({
   onMoreInfo?: () => void
 }) => {
   return (
-    <p className="text-little mb-2 color-label" style={{ color: '#616161' }}>
-      {title}{' '}
+    <p className="text-little mb-2 color-label" style={{ color: "#616161" }}>
+      {title}{" "}
       {moreInfo ? (
         <span onClick={onMoreInfo}>
-          <i className={`fas fa-${isInfo ? 'minus' : 'info'}-circle ml-2`} />
+          <i className={`fas fa-${isInfo ? "minus" : "info"}-circle ml-2`} />
         </span>
       ) : null}
     </p>
@@ -146,7 +139,7 @@ export const CardItems = ({
   value,
   url,
   onUrlClick,
-  copy
+  copy,
 }: ICardItem) => {
   const copyProps = useCopy()
   const onCopy = () => {
@@ -162,8 +155,8 @@ export const CardItems = ({
     }
   }
   const valueToURL = () => {
-    if (typeof value === 'string' && isValidURL(value))
-      return value.replace(/www./g, 'https://')
+    if (typeof value === "string" && isValidURL(value))
+      return value.replace(/www./g, "https://")
     return `https://google.com/search?q=${value}`
   }
   return (
@@ -178,9 +171,9 @@ export const CardItems = ({
               className="text-medium cursor-pointer m-0"
               onClick={() => {
                 onUrlClick?.()
-                window.open(valueToURL(), '_blank')
+                window.open(valueToURL(), "_blank")
               }}
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
               {value}
             </p>
@@ -204,7 +197,7 @@ export const DropDownMenu = ({
   id,
   items,
   dropDownIcon,
-  children
+  children,
 }: {
   id: string
   items: IDropDownItem[]
@@ -223,7 +216,7 @@ export const DropDownMenu = ({
         {children}
         {!children && (
           <i
-            className={`${dropDownIcon || 'fas fa-angle-down'} color-primary`}
+            className={`${dropDownIcon || "fas fa-angle-down"} color-primary`}
           />
         )}
       </div>
@@ -234,12 +227,12 @@ export const DropDownMenu = ({
             onClick={i.disabled ? undefined : i.action}
             key={index}
             style={{
-              color: i.disabled ? '#a1a1a1' : '',
-              cursor: i.disabled ? 'not-allowed' : 'pointer'
+              color: i.disabled ? "#a1a1a1" : "",
+              cursor: i.disabled ? "not-allowed" : "pointer",
             }}
           >
             {i?.icon && (
-              <span style={{ width: '25px' }} className="d-block">
+              <span style={{ width: "25px" }} className="d-block">
                 <i className={i?.icon} />
               </span>
             )}
@@ -252,7 +245,7 @@ export const DropDownMenu = ({
 }
 
 export const SeparatorComponent = () => (
-  <div style={{ width: '1px', height: '10px', background: '#cacaca' }} />
+  <div style={{ width: "1px", height: "10px", background: "#cacaca" }} />
 )
 
 export const RefreshComponent = ({ load, onRefresh, text }: IRefreshProps) => {
@@ -262,7 +255,7 @@ export const RefreshComponent = ({ load, onRefresh, text }: IRefreshProps) => {
       onClick={onRefresh}
     >
       {text ? <p className="m-0 font-12 color-label">{text}</p> : null}
-      <div style={{ width: '25px' }} className="f-row align-items-center">
+      <div style={{ width: "25px" }} className="f-row align-items-center">
         {load ? <PulseSVG /> : <RefreshSVG />}
       </div>
     </div>
@@ -277,59 +270,22 @@ export const MediaItem = ({ url }: { url: string }) => {
     <div className="w-100 h-100 d-flex align-items-center justify-content-center">
       {mediaUrl.load ? (
         <PulseSVG />
-      ) : mediaUrl.type === 'image' ? (
+      ) : mediaUrl.type === "image" ? (
         <img
           src={mediaUrl.url}
           alt=""
-          style={{ objectFit: 'contain' }}
+          style={{ objectFit: "contain" }}
           className="w-100 h-100"
         />
-      ) : mediaUrl.type === 'doc' ? (
+      ) : mediaUrl.type === "doc" ? (
         <iframe
-          src={mediaUrl.url.replace('?dl=0', '?raw=1')}
-          width={'100%'}
-          height={'100%'}
+          src={mediaUrl.url.replace("?dl=0", "?raw=1")}
+          width={"100%"}
+          height={"100%"}
           title="firefighter"
           // sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
         />
       ) : null}
-    </div>
-  )
-}
-
-export const SelectItem = ({
-  title,
-  description,
-  isActive,
-  onProceed,
-  onSelect,
-  disabled
-}: IRTI) => {
-  return (
-    <div
-      className={`rounded p-4 f-row-10 align-items-start result-item-type ${
-        isActive ? 'active' : ''
-      }`}
-      onClick={!isActive ? onSelect : undefined}
-    >
-      <div className="f-row-10 align-items-center">
-        <ElectionSVG />
-      </div>
-      <div className="f-column-15">
-        <h6 className={`m-0 ${disabled ? 'color-label' : ''}`}>{title}</h6>
-        <p className={`m-0 text-little ${disabled ? 'color-label' : ''}`}>
-          {description}
-        </p>
-        <HVC removeDOM view={isActive || false} className="mt-3">
-          <TypeButton
-            title="Proceed"
-            buttonSize="small"
-            onClick={onProceed}
-            disabled={disabled}
-            buttonType={disabled ? 'disabled' : 'bold'}
-          />
-        </HVC>
-      </div>
     </div>
   )
 }

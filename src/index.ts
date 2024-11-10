@@ -62,7 +62,6 @@ export {
   SeparatorComponent,
   RefreshComponent,
   MediaItem,
-  SelectItem,
 } from "./components/components"
 export {
   _handleTh,
