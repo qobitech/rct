@@ -50,7 +50,7 @@ export {
   DropDownMenu,
   SeparatorComponent,
   RefreshComponent,
-  // MediaItem,
+  MediaItem,
 } from "./components/components"
 export { TabToggler } from "./components/tab-toggler"
 export { useTabToggler } from "./components/tab-toggler/hooks"
@@ -109,9 +109,6 @@ export {
   ICardItem,
   ICopyProps,
   IDropDownItem,
-  // IImgSize,
   IModalProps,
-  // IRTI,
   IRefreshProps,
-  // IUseImage,
 } from "./components/hooks"
