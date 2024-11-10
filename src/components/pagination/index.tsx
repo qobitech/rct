@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactPaginate from 'react-paginate'
+import React from "react"
+import ReactPaginate from "react-paginate"
 
 export interface IPaginationComponent {
   handlePagination?: (selectedItem: { selected: number }) => void
@@ -7,14 +7,14 @@ export interface IPaginationComponent {
   pages: number
 }
 
-const PaginationComponent: React.FC<IPaginationComponent> = ({
+export const PaginationComponent: React.FC<IPaginationComponent> = ({
   currentPage,
   handlePagination,
-  pages
+  pages,
 }) => {
   return (
     <div
-      style={{ height: '71.14px' }}
+      style={{ height: "71.14px" }}
       className="f-column justify-content-center align-items-center"
     >
       <ReactPaginate
@@ -23,12 +23,10 @@ const PaginationComponent: React.FC<IPaginationComponent> = ({
         nextLabel=">>"
         pageCount={pages}
         onPageChange={handlePagination}
-        containerClassName={'pagination'}
-        activeClassName={'active'}
+        containerClassName={"pagination"}
+        activeClassName={"active"}
         forcePage={currentPage - 1}
       />
     </div>
   )
 }
-
-export default PaginationComponent

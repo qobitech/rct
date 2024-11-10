@@ -1,50 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { IUseTabToggler } from "./interface"
+import { ITabToggesOption } from "./interface"
 
-export interface ITabToggesOption {
-  name: string
-  id: string
-  icon?: string
-  view?: "all" | "text" | "icon"
-  hidden?: boolean
-  onClick?: () => void
-}
-
-export type togglerPositionType = "left" | "right" | "center"
-
-export interface IUseTabToggler {
-  category: ITabToggesOption
-  handleCategory: (category: ITabToggesOption) => void
-  opt: ITabToggesOption[]
-  setPosition?: (position: togglerPositionType) => void
-  position?: togglerPositionType
-  isCategory?: (cat: ITabToggesOption) => boolean
-}
-
-export const useTabToggler = (
-  opt: ITabToggesOption[],
-  defaultCategory: ITabToggesOption,
-  defaultPosition?: togglerPositionType
-): IUseTabToggler => {
-  const [category, setCategory] = useState<ITabToggesOption>(defaultCategory)
-  const [position, setPosition] = useState<togglerPositionType>(
-    defaultPosition || "left"
-  )
-
-  const handleCategory = (category: ITabToggesOption) => {
-    setCategory(category)
-  }
-
-  const isCategory = (cat: ITabToggesOption) => {
-    if (cat.name) return cat.name === category.name
-    if (cat.icon) return cat.icon === category.icon
-    return false
-  }
-
-  return { category, handleCategory, opt, setPosition, position, isCategory }
-}
-
-const TabToggler = ({
+export const TabToggler = ({
   tabTogglerProps,
 }: {
   tabTogglerProps: IUseTabToggler
@@ -136,8 +95,6 @@ const IconComponent = ({
     </TabHeaderTextStyle>
   )
 }
-
-export default TabToggler
 
 const TabHeaderTextStyle = styled.p`
   background: #fff;

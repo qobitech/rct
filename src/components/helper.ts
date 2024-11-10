@@ -55,7 +55,7 @@ const getLastDigit = (rank: number) => {
   return parseInt(digit[digit.length - 1])
 }
 
-export const getRanking = (rank: number) => {
+export const _getRanking = (rank: number) => {
   if (rank) {
     switch (getLastDigit(rank)) {
       case 3:
@@ -72,7 +72,7 @@ export const getRanking = (rank: number) => {
   }
 }
 
-export function generateUUID() {
+export function _generateUUID() {
   let d = new Date().getTime()
   let d2 =
     (typeof performance !== "undefined" &&
@@ -92,17 +92,17 @@ export function generateUUID() {
   })
 }
 
-export const getSlug = (title: string) => {
+export const _getSlug = (title: string) => {
   if (!title) return ""
   return title.trim().split(" ").join("-").toLowerCase()
 }
 
-export const reverseSlug = (title: string) => {
+export const _reverseSlug = (title: string) => {
   if (!title) return ""
   return title.trim().split("-").join(" ").toLowerCase()
 }
 
-export function replaceObjects<T extends { [key: string]: any }>(
+export function _replaceObjects<T extends { [key: string]: any }>(
   original: T[],
   replacements: T[],
   keyId: string
@@ -118,7 +118,7 @@ export function replaceObjects<T extends { [key: string]: any }>(
   })
 }
 
-export function copyObjectsWithUniqueId<T extends { [key: string]: any }>(
+export function _copyObjectsWithUniqueId<T extends { [key: string]: any }>(
   sourceArray: T[],
   destinationArray: T[],
   keyId: string,
@@ -139,7 +139,7 @@ export function copyObjectsWithUniqueId<T extends { [key: string]: any }>(
   return destinationArray
 }
 
-export const wordVariation = (
+export const _wordVariation = (
   count: number,
   word: string,
   hideCount?: boolean
@@ -148,7 +148,7 @@ export const wordVariation = (
   return count + ` ${word}${count > 1 ? "s" : ""}`
 }
 
-export const handleScroll = (ref: React.RefObject<HTMLDivElement>) => {
+export const _handleScroll = (ref: React.RefObject<HTMLDivElement>) => {
   window.scrollTo({
     top: (ref.current?.offsetTop || 0) - 40,
     left: 0,
@@ -156,7 +156,7 @@ export const handleScroll = (ref: React.RefObject<HTMLDivElement>) => {
   })
 }
 
-export const handleScrollRightSection = (
+export const _handleScrollRightSection = (
   ref: React.RefObject<HTMLDivElement>
 ) => {
   if (ref.current) {
@@ -164,7 +164,7 @@ export const handleScrollRightSection = (
   }
 }
 
-export const getAmount = (amount?: string) => {
+export const _getAmount = (amount?: string) => {
   const am = Number(amount || "").toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -172,19 +172,19 @@ export const getAmount = (amount?: string) => {
   return am
 }
 
-export const getMYear = (date: string | number | Date) =>
+export const _getMYear = (date: string | number | Date) =>
   new Date(date).toLocaleDateString(undefined, {
     month: "long",
     year: "numeric",
   })
 
-export const getDayMonth = (date: string | number | Date) =>
+export const _getDayMonth = (date: string | number | Date) =>
   new Date(date).toLocaleDateString(undefined, {
     month: "2-digit",
     day: "numeric",
   })
 
-export const previewMediaFile = (file: any) => {
+export const _previewMediaFile = (file: any) => {
   const params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
                         width=1500,height=800,left=1000,top=0, zoom=200%`
   const url = typeof file !== "string" ? URL.createObjectURL(file) : file
@@ -198,7 +198,7 @@ export const previewMediaFile = (file: any) => {
   }
 }
 
-export const formatBytes = (bytes: number) => {
+export const _formatBytes = (bytes: number) => {
   if (bytes === 0) return "0 Bytes"
 
   const k = 1024
@@ -208,7 +208,7 @@ export const formatBytes = (bytes: number) => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
 }
 
-export const formatDate = (value: string): string => {
+export const _formatDate = (value: string): string => {
   const date = new Date(value)
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, "0")
@@ -221,7 +221,7 @@ interface ObjectWithId {
   id: string | number // Assuming IDs can be string or number
 }
 
-export function concatenateUnique<T extends ObjectWithId>(
+export function _concatenateUnique<T extends ObjectWithId>(
   arr1: T[],
   arr2: T[],
   idKey: keyof T

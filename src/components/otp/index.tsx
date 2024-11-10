@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import TextPrompt from '../text-prompt'
-import styled from 'styled-components'
+import React, { useState } from "react"
+import TextPrompt from "../text-prompt"
+import styled from "styled-components"
 
 interface OTPInputProps {
   onChange: (otp: string) => void
@@ -8,8 +8,12 @@ interface OTPInputProps {
   error?: string | undefined
 }
 
-const OTPInput: React.FC<OTPInputProps> = ({ onChange, label, error }) => {
-  const [otp, setOtp] = useState<string[]>(['', '', '', ''])
+export const TypeInputOTP: React.FC<OTPInputProps> = ({
+  onChange,
+  label,
+  error,
+}) => {
+  const [otp, setOtp] = useState<string[]>(["", "", "", ""])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -21,7 +25,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange, label, error }) => {
       const newOtp = [...otp]
       newOtp[index] = value
       setOtp(newOtp)
-      onChange(newOtp.join(''))
+      onChange(newOtp.join(""))
 
       // Focus next input if current is not empty and it's not the last input
       if (value && index < 3) {
@@ -35,16 +39,16 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange, label, error }) => {
     e: React.KeyboardEvent<HTMLInputElement>,
     index: number
   ) => {
-    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
       const prevInput = document.getElementById(`otp-input-${index - 1}`)
       prevInput?.focus()
     }
   }
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const pasteData = e.clipboardData.getData('text')
+    const pasteData = e.clipboardData.getData("text")
     if (/^\d{4}$/.test(pasteData)) {
-      const newOtp = pasteData.split('')
+      const newOtp = pasteData.split("")
       setOtp(newOtp)
       onChange(pasteData)
       // Focus the last input
@@ -68,7 +72,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange, label, error }) => {
             onKeyDown={(e) => handleBackspace(e, index)}
             onPaste={handlePaste} // Add paste handler
             maxLength={1}
-            style={{ height: '70px' }}
+            style={{ height: "70px" }}
           />
         ))}
       </OTPClass>
@@ -80,8 +84,6 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange, label, error }) => {
     </div>
   )
 }
-
-export default OTPInput
 
 const OTPClass = styled.div`
   input {

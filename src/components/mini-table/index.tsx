@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useMemo } from 'react'
-import { TypeCheckbox } from '../checkbox'
-import { HVC } from '../components'
-import TextPrompt from '../text-prompt'
-import styled from 'styled-components'
+import React, { useMemo } from "react"
+import { TypeCheckbox } from "../checkbox"
+import { HVC } from "../components"
+import TextPrompt from "../text-prompt"
+import styled from "styled-components"
 import {
   CellValueActionComponent,
   CellValueComponent,
   IMiniTableRecord,
   IResultTable,
-  TableActionComponent
-} from './utils'
+  TableActionComponent,
+} from "./utils"
 
 const PAGE_SIZE = 10
 
-const MiniTable: React.FC<IResultTable> = ({
+export const MiniTable: React.FC<IResultTable> = ({
   header,
   record,
   currentPage,
@@ -24,7 +24,7 @@ const MiniTable: React.FC<IResultTable> = ({
   lastCardElementRef,
   ctaComponent,
   hideAction,
-  rowErrorMessage
+  rowErrorMessage,
 }) => {
   const isRecord = record?.length > 0
   const isCheckedRow = (id: string) => {
@@ -86,9 +86,9 @@ const MiniTable: React.FC<IResultTable> = ({
             <thead className="thead_blue position-relative">
               <tr
                 style={{
-                  position: 'sticky',
+                  position: "sticky",
                   top: 0,
-                  background: '#fff'
+                  background: "#fff",
                 }}
               >
                 {!hideNumbering && <th></th>}
@@ -123,15 +123,15 @@ const MiniTable: React.FC<IResultTable> = ({
                 record.map((i, jindex) => (
                   <tr
                     key={jindex}
-                    className={`${i.isSelected ? `selected-table-row` : ''} ${
-                      i.rowError ? 'row-error' : ''
+                    className={`${i.isSelected ? `selected-table-row` : ""} ${
+                      i.rowError ? "row-error" : ""
                     }`}
                     ref={
                       jindex + 1 === record.length ? lastCardElementRef : null
                     }
                   >
                     {!hideNumbering && (
-                      <td style={{ padding: '10px 0px 10px 10px' }}>
+                      <td style={{ padding: "10px 0px 10px 10px" }}>
                         <p style={{ margin: 0 }}>
                           {jindex + 1 + ((currentPage || 1) - 1) * PAGE_SIZE}
                         </p>
@@ -146,9 +146,9 @@ const MiniTable: React.FC<IResultTable> = ({
                           >
                             <div
                               style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                minHeight: '35px'
+                                display: "flex",
+                                alignItems: "center",
+                                minHeight: "35px",
                               }}
                             >
                               {!hideCheck && (
@@ -186,8 +186,8 @@ const MiniTable: React.FC<IResultTable> = ({
                               {...j}
                               nomargin={
                                 index === (i?.rowActions?.length || 0) - 1
-                                  ? 'true'
-                                  : 'false'
+                                  ? "true"
+                                  : "false"
                               }
                             />
                           ))}
@@ -325,5 +325,3 @@ const TableClass = styled.div`
     border-bottom: 1px solid #f2f2f2;
   }
 `
-
-export default MiniTable

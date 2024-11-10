@@ -1,19 +1,5 @@
-import { useState } from 'react'
-
-export interface ITabComponentProp {
-  isSelected: boolean
-  setTab: React.Dispatch<React.SetStateAction<string>>
-  title: string
-  onSetTab?: () => void
-}
-
-export interface IUseTab {
-  tab: string
-  setTab: React.Dispatch<React.SetStateAction<string>>
-  isTab: (value: string) => boolean
-  tabProps: ITabComponentProp[]
-  getDataType: (typeQuery: string | undefined) => string
-}
+import { useState } from "react"
+import { ITabComponentProp, IUseTab } from "./interface"
 
 export const useTabSection = (
   defaultTab: string,
@@ -42,7 +28,7 @@ export const useTabSection = (
     isSelected: isTab(i),
     title: i,
     setTab,
-    onSetTab
+    onSetTab,
   })) as ITabComponentProp[]
 
   return {
@@ -50,6 +36,6 @@ export const useTabSection = (
     setTab,
     isTab,
     tabProps,
-    getDataType
+    getDataType,
   }
 }

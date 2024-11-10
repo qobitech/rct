@@ -1,21 +1,21 @@
-import React from 'react'
-import { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form'
-import { TypeInput } from '../input'
-import { TypeSelect } from '../select'
-import { TypeCheckbox } from '../checkbox'
-import { TypeTextArea } from '../text-area'
-import { HVC } from '../components'
-import { IRefreshProps } from '../hooks'
-import OTPInput from '../otp'
+import React from "react"
+import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form"
+import { TypeInput } from "../input"
+import { TypeSelect } from "../select"
+import { TypeCheckbox } from "../checkbox"
+import { TypeTextArea } from "../text-area"
+import { HVC } from "../components"
+import { IRefreshProps } from "../hooks"
+import OTPInput from "../otp"
 
 export type typecomponent =
-  | 'input'
-  | 'select'
-  | 'text-area'
-  | 'radio'
-  | 'check-box'
-  | 'password'
-  | 'otp'
+  | "input"
+  | "select"
+  | "text-area"
+  | "radio"
+  | "check-box"
+  | "password"
+  | "otp"
 
 interface ISelectOptions {
   id: number
@@ -38,7 +38,7 @@ export interface IFormComponent {
   cta?: {
     text: string
     link: string
-    type: 'external' | 'internal'
+    type: "external" | "internal"
   }
   refreshProps?: IRefreshProps
   className?: string
@@ -54,16 +54,16 @@ interface IFormBuilder<T extends FieldValues> {
   min?: boolean
 }
 
-const FormBuilder = <T extends FieldValues>({
+export const FormBuilder = <T extends FieldValues>({
   formComponent,
   hookForm,
-  min
+  min,
 }: IFormBuilder<T>) => {
   return (
     <>
       {formComponent.map((i) => (
         <HVC removeDOM view={!i.hide} key={i.id} className={i.className}>
-          {i.component === 'input' && (
+          {i.component === "input" && (
             <TypeInput
               {...hookForm.register(i.id as Path<T>)}
               label={i.label}
@@ -79,7 +79,7 @@ const FormBuilder = <T extends FieldValues>({
               minComponent={min}
             />
           )}
-          {i.component === 'otp' && (
+          {i.component === "otp" && (
             <OTPInput
               onChange={(otp) => {
                 hookForm.setValue(i.id as Path<T>, otp as PathValue<T, Path<T>>)
@@ -90,11 +90,11 @@ const FormBuilder = <T extends FieldValues>({
               }
             />
           )}
-          {i.component === 'select' && (
+          {i.component === "select" && (
             <TypeSelect
               initoption={i.initOptions as ISelectOptions}
               optionsdata={i.optionData as ISelectOptions[]}
-              customwidth={'100%'}
+              customwidth={"100%"}
               label={i.label}
               refreshProps={i.refreshProps}
               error={
@@ -105,16 +105,16 @@ const FormBuilder = <T extends FieldValues>({
                   e: React.ChangeEvent<HTMLSelectElement>
                 ) => {
                   hookForm.setError(i.id as Path<T>, {
-                    message: ''
+                    message: "",
                   })
                   if (!e.target.value) {
                     hookForm.setError(i.id as Path<T>, {
-                      message: i.id + ' is missing'
+                      message: i.id + " is missing",
                     })
                   }
                   hookForm.setValue(i.id as Path<T>, e.target.value as any)
                 }
-                if (typeof i.onPauseChange === 'function') {
+                if (typeof i.onPauseChange === "function") {
                   i?.onPauseChange?.(() => {
                     handleChange(e)
                   })
@@ -123,11 +123,11 @@ const FormBuilder = <T extends FieldValues>({
                 }
               }}
               value={hookForm.watch(i.id as Path<T>)}
-              className={i.className || ''}
+              className={i.className || ""}
               minComponent={min}
             />
           )}
-          {i.component === 'text-area' && (
+          {i.component === "text-area" && (
             <TypeTextArea
               {...hookForm.register(i.id as Path<T>)}
               placeholder={i.placeHolder}
@@ -138,7 +138,7 @@ const FormBuilder = <T extends FieldValues>({
               className={i.className}
             />
           )}
-          {i.component === 'check-box' && (
+          {i.component === "check-box" && (
             <div className="f-row-10 align-items-center">
               <TypeCheckbox
                 {...hookForm.register(i.id as Path<T>)}
@@ -150,7 +150,7 @@ const FormBuilder = <T extends FieldValues>({
               <label className="m-0 text-little color-label">{i.label}</label>
             </div>
           )}
-          {i.component === 'radio' && (
+          {i.component === "radio" && (
             <div className="f-row-10 align-items-center">
               <TypeInput
                 type="radio"
@@ -170,5 +170,3 @@ const FormBuilder = <T extends FieldValues>({
     </>
   )
 }
-
-export default FormBuilder
