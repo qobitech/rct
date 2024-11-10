@@ -61,31 +61,31 @@ export {
 export { NotificationModal } from "./components/new-modal"
 export { PaginationComponent } from "./components/pagination"
 export { useModal } from "./components/new-modal/hook"
-export {
-  useUploadFileHook,
-  useFormHook,
-  useToggler,
-  useCallAPI,
-  useCopy,
-  useDebounce,
-  useGetMediaUrl,
-  useImage,
-  useImageDetails,
-  useImageSize,
-  useInfiniteScroll,
-  useOnLoadImages,
-  useShare,
-  useStateHook,
-  reducer,
-  ICardItem,
-  ICopyProps,
-  IDropDownItem,
-  IImgSize,
-  IModalProps,
-  IRTI,
-  IRefreshProps,
-  IUseImage,
-} from "./components/hooks"
+// export {
+//   useUploadFileHook,
+//   useFormHook,
+//   useToggler,
+//   useCallAPI,
+//   useCopy,
+//   useDebounce,
+//   useGetMediaUrl,
+//   useImage,
+//   useImageDetails,
+//   useImageSize,
+//   useInfiniteScroll,
+//   useOnLoadImages,
+//   useShare,
+//   useStateHook,
+//   reducer,
+//   ICardItem,
+//   ICopyProps,
+//   IDropDownItem,
+//   IImgSize,
+//   IModalProps,
+//   IRTI,
+//   IRefreshProps,
+//   IUseImage,
+// } from "./components/hooks"
 
 // export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
 
