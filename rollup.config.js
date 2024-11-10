@@ -46,6 +46,7 @@ module.exports = {
     }),
   ],
   external: [
+    "axios",
     "react",
     "react-dom",
     "styled-components",

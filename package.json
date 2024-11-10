@@ -9,6 +9,7 @@
     "dist"
   ],
   "peerDependencies": {
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "postcss": "^8.0.0",
     "react": "^17.0.0 || ^18.0.0",
@@ -48,9 +49,5 @@
     "tslib": "^2.8.1",
     "typescript": "^5.6.3"
   },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "prop-types": "^15.8.1",
-    "query-string": "^9.1.1"
-  }
+  "dependencies": {}
 }
