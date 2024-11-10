@@ -17,7 +17,8 @@
     "react-hook-form": "^7.39.1",
     "react-paginate": "^8.2.0",
     "styled-components": "^6.1.13",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@hookform/resolvers": "^2.9.10"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -50,7 +51,6 @@
   "dependencies": {
     "axios": "^1.7.7",
     "prop-types": "^15.8.1",
-    "query-string": "^9.1.1",
-    "@hookform/resolvers": "^2.9.10"
+    "query-string": "^9.1.1"
   }
 }

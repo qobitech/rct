@@ -354,7 +354,6 @@ const getFileSize = async (url: string): Promise<number | null> => {
     const contentLength = response.headers["content-length"]
     return contentLength ? parseInt(contentLength, 10) : null
   } catch (error) {
-    console.error("Error getting file size:", error)
     return null
   }
 }
@@ -375,9 +374,7 @@ export const useImageSize = (
           height: size.height,
         }))
       })
-      .catch((error) => {
-        console.error("Error loading image:", error)
-      })
+      .catch((error) => {})
 
     getFileSize(imageUrl)
       .then((size) => {
@@ -386,9 +383,7 @@ export const useImageSize = (
           size,
         }))
       })
-      .catch((error) => {
-        console.error("Error getting file size:", error)
-      })
+      .catch((error) => {})
   }, [imageUrl])
 
   return imageProps
@@ -455,7 +450,6 @@ const getFileDetails = async (
       lastModified: lastModified ? new Date(lastModified) : null,
     }
   } catch (error) {
-    console.error("Error getting file details:", error)
     return {
       size: null,
       name: "",
@@ -484,9 +478,7 @@ export const useImageDetails = (imageUrl: string): IFileDetails => {
         ])
 
         setImageProps({ ...size, ...details })
-      } catch (error) {
-        console.error("Error loading image details:", error)
-      }
+      } catch (error) {}
     }
 
     fetchData()
