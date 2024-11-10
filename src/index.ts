@@ -87,30 +87,30 @@ export { useModal } from "./components/new-modal/hook"
 //   IUseImage,
 // } from "./components/hooks"
 
-// export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
+export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
 
-// export { useCountDown } from "./components/timer"
+export { useCountDown } from "./components/timer"
 
-// export {
-//   _handleTh,
-//   _separator,
-//   _joiner,
-//   _removeHTML,
-//   _getRanking,
-//   _generateUUID,
-//   _getSlug,
-//   _reverseSlug,
-//   _replaceObjects,
-//   _copyObjectsWithUniqueId,
-//   _wordVariation,
-//   _handleScroll,
-//   _handleScrollRightSection,
-//   _getAmount,
-//   _getMYear,
-//   _getDayMonth,
-//   _previewMediaFile,
-//   _concatenateUnique,
-//   _formatBytes,
-//   _formatDate,
-//   _isMobile,
-// } from "./components/helper"
+export {
+  _handleTh,
+  _separator,
+  _joiner,
+  _removeHTML,
+  _getRanking,
+  _generateUUID,
+  _getSlug,
+  _reverseSlug,
+  _replaceObjects,
+  _copyObjectsWithUniqueId,
+  _wordVariation,
+  _handleScroll,
+  _handleScrollRightSection,
+  _getAmount,
+  _getMYear,
+  _getDayMonth,
+  _previewMediaFile,
+  _concatenateUnique,
+  _formatBytes,
+  _formatDate,
+  _isMobile,
+} from "./components/helper"
