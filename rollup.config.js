@@ -14,12 +14,12 @@ module.exports = {
     {
       file: "dist/index.cjs.js",
       format: "cjs",
-      sourcemap: false,
+      sourcemap: true,
     },
     {
       file: "dist/index.esm.js",
       format: "esm",
-      sourcemap: false,
+      sourcemap: true,
     },
   ],
   plugins: [
