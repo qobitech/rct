@@ -62,7 +62,7 @@ export { NotificationModal } from "./components/new-modal"
 export { PaginationComponent } from "./components/pagination"
 export { useModal } from "./components/new-modal/hook"
 
-// export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
+export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
 
 export { useCountDown } from "./components/timer"
 
@@ -97,9 +97,9 @@ export {
   useCallAPI,
   useCopy,
   useDebounce,
-  // useGetMediaUrl,
-  // useImage,
-  // useImageDetails,
+  useGetMediaUrl,
+  useImage,
+  useImageDetails,
   useImageSize,
   useInfiniteScroll,
   useOnLoadImages,
@@ -111,7 +111,7 @@ export {
   IDropDownItem,
   IImgSize,
   IModalProps,
-  // IRTI,
+  IRTI,
   IRefreshProps,
-  // IUseImage,
+  IUseImage,
 } from "./components/hooks"
