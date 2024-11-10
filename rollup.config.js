@@ -5,6 +5,7 @@ const babel = require("@rollup/plugin-babel")
 const postcss = require("rollup-plugin-postcss")
 const path = require("path")
 const json = require("@rollup/plugin-json")
+const { terser } = require("rollup-plugin-terser")
 
 module.exports = {
   input: "src/index.ts",
@@ -12,15 +13,16 @@ module.exports = {
     {
       file: "dist/index.cjs.js",
       format: "cjs",
-      sourcemap: true,
+      sourcemap: false,
     },
     {
       file: "dist/index.esm.js",
       format: "esm",
-      sourcemap: true,
+      sourcemap: false,
     },
   ],
   plugins: [
+    terser(),
     json(),
     postcss({
       extract: true, // Extracts CSS into a separate file in the build
