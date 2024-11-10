@@ -6,116 +6,116 @@ import React, {
   useRef,
   useState,
 } from "react"
-import {
-  DefaultValues,
-  FieldValues,
-  Path,
-  PathValue,
-  useForm,
-  UseFormReturn,
-  UseFormSetError,
-  UseFormSetValue,
-} from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+// import {
+//   DefaultValues,
+//   FieldValues,
+//   Path,
+//   PathValue,
+//   useForm,
+//   UseFormReturn,
+//   UseFormSetError,
+//   UseFormSetValue,
+// } from "react-hook-form"
+// import { yupResolver } from "@hookform/resolvers/yup"
+// import * as yup from "yup"
 import axios from "axios"
 
 type dragType = React.DragEvent<HTMLInputElement>
 
-export const useUploadFileHook = <T extends HTMLElement, S extends FieldValues>(
-  setError: UseFormSetError<S>,
-  setValue: UseFormSetValue<S>,
-  fileName: Path<S>,
-  fileType: string,
-  fileSize: number
-): [
-  onDragEnter: (e: dragType) => void,
-  onDragLeave: (e: dragType) => void,
-  onDrop: (e: dragType) => void,
-  onFileChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void,
-  imgRef: React.RefObject<T>,
-  isFileAdd: boolean,
-  addedFileName: string
-] => {
-  const imgRef = useRef<T>(null)
+// export const useUploadFileHook = <T extends HTMLElement, S extends FieldValues>(
+//   setError: UseFormSetError<S>,
+//   setValue: UseFormSetValue<S>,
+//   fileName: Path<S>,
+//   fileType: string,
+//   fileSize: number
+// ): [
+//   onDragEnter: (e: dragType) => void,
+//   onDragLeave: (e: dragType) => void,
+//   onDrop: (e: dragType) => void,
+//   onFileChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void,
+//   imgRef: React.RefObject<T>,
+//   isFileAdd: boolean,
+//   addedFileName: string
+// ] => {
+//   const imgRef = useRef<T>(null)
 
-  const [isFileAdd, setIsFileAdd] = useState<boolean>(false)
-  const [addedFileName, setAddedFileName] = useState<string>("")
+//   const [isFileAdd, setIsFileAdd] = useState<boolean>(false)
+//   const [addedFileName, setAddedFileName] = useState<string>("")
 
-  const onDragEnter = (e: dragType) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (imgRef.current) {
-      imgRef.current.style.backgroundColor = "#929292"
-      setIsFileAdd(true)
-    }
-  }
+//   const onDragEnter = (e: dragType) => {
+//     e.preventDefault()
+//     e.stopPropagation()
+//     if (imgRef.current) {
+//       imgRef.current.style.backgroundColor = "#929292"
+//       setIsFileAdd(true)
+//     }
+//   }
 
-  const onDragLeave = (e: dragType) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (imgRef.current) {
-      imgRef.current.style.backgroundColor = "#fff"
-      setIsFileAdd(false)
-    }
-  }
+//   const onDragLeave = (e: dragType) => {
+//     e.preventDefault()
+//     e.stopPropagation()
+//     if (imgRef.current) {
+//       imgRef.current.style.backgroundColor = "#fff"
+//       setIsFileAdd(false)
+//     }
+//   }
 
-  const onDrop = (e: dragType) => {
-    const errorMessage = verifyInputFile(e?.dataTransfer?.files[0])
-    setError(fileName, { message: errorMessage })
-    if (!errorMessage)
-      setValue(fileName, e?.dataTransfer?.files[0] as PathValue<S, Path<S>>)
-    if (imgRef.current) {
-      imgRef.current.style.backgroundColor = "#fff"
-      setIsFileAdd(false)
-    }
-  }
+//   const onDrop = (e: dragType) => {
+//     const errorMessage = verifyInputFile(e?.dataTransfer?.files[0])
+//     setError(fileName, { message: errorMessage })
+//     if (!errorMessage)
+//       setValue(fileName, e?.dataTransfer?.files[0] as PathValue<S, Path<S>>)
+//     if (imgRef.current) {
+//       imgRef.current.style.backgroundColor = "#fff"
+//       setIsFileAdd(false)
+//     }
+//   }
 
-  const onFileChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = target
-    if (files) {
-      const errorMessage = verifyInputFile(files[0])
-      setError(fileName, { message: errorMessage })
-      if (!errorMessage) setValue(fileName, files[0] as PathValue<S, Path<S>>)
-    }
-  }
+//   const onFileChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+//     const { files } = target
+//     if (files) {
+//       const errorMessage = verifyInputFile(files[0])
+//       setError(fileName, { message: errorMessage })
+//       if (!errorMessage) setValue(fileName, files[0] as PathValue<S, Path<S>>)
+//     }
+//   }
 
-  const verifyInputFile = (file: File) => {
-    const { type, size, name } = file
-    if (!type.includes(fileType)) {
-      return `Must be ${fileType}`
-    }
+//   const verifyInputFile = (file: File) => {
+//     const { type, size, name } = file
+//     if (!type.includes(fileType)) {
+//       return `Must be ${fileType}`
+//     }
 
-    if (size > fileSize) {
-      return "File size not allowed"
-    }
-    setAddedFileName(name)
-  }
+//     if (size > fileSize) {
+//       return "File size not allowed"
+//     }
+//     setAddedFileName(name)
+//   }
 
-  return [
-    onDragEnter,
-    onDragLeave,
-    onDrop,
-    onFileChange,
-    imgRef,
-    isFileAdd,
-    addedFileName,
-  ]
-}
+//   return [
+//     onDragEnter,
+//     onDragLeave,
+//     onDrop,
+//     onFileChange,
+//     imgRef,
+//     isFileAdd,
+//     addedFileName,
+//   ]
+// }
 
-export const useFormHook = <T extends {}>(
-  objSchema: {},
-  defaultValues?: DefaultValues<T> | undefined
-): [UseFormReturn<T, any>] => {
-  const schema = yup.object().shape(objSchema)
-  const formMethods = useForm<T>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-    defaultValues,
-  })
+// export const useFormHook = <T extends {}>(
+//   objSchema: {},
+//   defaultValues?: DefaultValues<T> | undefined
+// ): [UseFormReturn<T, any>] => {
+//   const schema = yup.object().shape(objSchema)
+//   const formMethods = useForm<T>({
+//     resolver: yupResolver(schema),
+//     mode: "onChange",
+//     defaultValues,
+//   })
 
-  return [formMethods]
-}
+//   return [formMethods]
+// }
 
 export const useToggler = (defaultCategory: string) => {
   const [category, setCategory] = useState<string>(defaultCategory)
