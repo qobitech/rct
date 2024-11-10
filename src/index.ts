@@ -23,30 +23,30 @@ export { useTableAction } from "./components/mini-table/hooks"
 export { PillComponent, IPillData } from "./components/pills"
 export { RightSection } from "./components/right-section"
 export { useRightSection } from "./components/right-section/hooks"
+export {
+  IGetCTA,
+  IRSAction,
+  ICallSection,
+  IGlobalRightSection,
+  IRSection,
+  IRightSection,
+  IRightSectionHistory,
+  IRsPropsCTA,
+  actionComponent,
+  actionType,
+} from "./components/right-section/interface"
+export {
+  TabSection,
+  TabBlockComponent,
+  TabComponent,
+} from "./components/tab-section"
+export { useTabSection } from "./components/tab-section/hooks"
+export { ITabComponentProp, IUseTab } from "./components/tab-section/interface"
 // export { NotificationModal } from "./components/new-modal"
 // export { MultipleMediaUploadComponent } from "./components/multiple-upload-document"
 // export { PaginationComponent } from "./components/pagination"
 // export { useModal } from "./components/new-modal/hook"
-// export {
-//   IGetCTA,
-//   IRSAction,
-//   ICallSection,
-//   IGlobalRightSection,
-//   IRSection,
-//   IRightSection,
-//   IRightSectionHistory,
-//   IRsPropsCTA,
-//   actionComponent,
-//   actionType,
-// } from "./components/right-section/interface"
 
-// export {
-//   TabSection,
-//   TabBlockComponent,
-//   TabComponent,
-// } from "./components/tab-section"
-// export { useTabSection } from "./components/tab-section/hooks"
-// export { ITabComponentProp, IUseTab } from "./components/tab-section/interface"
 // export { TabToggler } from "./components/tab-toggler"
 // export { useTabToggler } from "./components/tab-toggler/hooks"
 // export {
